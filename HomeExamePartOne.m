@@ -23,11 +23,17 @@ A2= [1 w2p/Q2 w2p^2]; %
 sys1 = tf(B1,A1);
 sys2 = tf(B2,A2);
 
-sys = sys1 *sys2;
+sys = sys1 * sys2;
 
-bode (sys);
-hold on
-bode(sys1)
-hold on
-bode(sys2)
-    grid on
+[z, p, k] = zpkdata(sys);
+z
+p
+k
+
+%pzmap(sys) 
+%bode (sys);
+%hold on
+%bode(sys1)
+%hold on
+%bode(sys2)
+%grid on
