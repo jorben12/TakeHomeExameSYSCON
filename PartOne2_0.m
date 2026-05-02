@@ -23,3 +23,20 @@ bode(sys)
 [A1 ,B1]=tfdata(sys1)
 [A2, B2] = tfdata(sys2)
 
+%%
+clear all
+close all
+
+A1 =[1/44,7^2 0 1];
+B1 = [1/44,7^2 1 1];
+
+A2 = [1/500^2 0 1];
+B2 = [1/500^2 1.2 1];
+
+sys1 = tf(A1,B1);
+sys2 = tf(A2,B2);
+sys = sys1*sys2;
+figure(1)
+bode(sys)
+figure(2)
+pzmap(sys)
