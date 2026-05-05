@@ -23,18 +23,18 @@ bode(sys2)
 [A,B] = tfdata(sys1)
 [A,B] = tfdata(sys2)
 
-A1 =[1/44,7^2 0 1];
-B1 = [1/44,7^2 1 1];
+A1 =[1/44.99^2 0 1];
+B1 = [1/44.99^2 0.988 1];
 
 A2 = [1/500^2 0 1];
 B2 = [1/500^2 1.2 1];
 
-sys1 = tf(A1,B1);
-sys2 = tf(A2,B2);
-sys = sys1*sys2;
+sysA = tf(A1,B1);
+sysB = tf(A2,B2);
+sysC = sysA*sysB;
 
 figure(2)
-bode(sys)
+bode(sysC)
 
 
 figure(3)
