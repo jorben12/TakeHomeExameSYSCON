@@ -4,21 +4,13 @@ load tf04.mat
 
 figure(1);
 bode(sys); %DC gain betsaande waarde en de Gain op oneidig gaat naar min oneindig
-hold on;
+
 figure(2);
 pzmap(sys);% alle pollen linker deel
-hold on;
+
 figure(3);
-nyquist(sys);
-hold on;
-figure(4);
 step(sys);% gaat niet naar oneindig maar naar een reeele waarde
-hold on;
-figure(5);
-impulse(sys);
-hold on;
-figure(6);
-rlocus(sys);
+
 %%
 
  clear all

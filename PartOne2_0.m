@@ -1,3 +1,4 @@
+%Part1
 clear all
 close all
 
@@ -39,3 +40,40 @@ bode(sysC)
 
 figure(3)
 pzmap(sys)
+
+%%
+%Part 2 
+
+clear all
+close all
+load tf04.mat
+
+figure(1);
+bode(sys); 
+
+figure(2);
+pzmap(sys);
+
+figure(3);
+step(sys);
+
+
+[Gm,Pm,Wcp, Wvp] = margin(sys);
+Gm_dB = 20*log10(Gm)
+Wcp
+
+figure(4);
+rlocus(sys);
+
+%%
+%Part 3 
+clear all
+close all
+load tf04.mat
+
+[Gm,Pm,Wcp, Wvp] = margin(sys);
+
+Gm
+Wcp
+T =2 * pi/Wcp
+
