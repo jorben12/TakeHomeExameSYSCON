@@ -82,12 +82,13 @@ TIzn = T/2;
 TDzn = T/8;
 
 %voorbereidingen simulink inputs met KZ parmater
-t = (0:0.0001:1.6)';
+t = (0:0.0001:0.75)';
 
 k = Kzn
 KI = 1/(TIzn*Kzn)
 KD = TDzn/Kzn
 TaS = 0.01
+tdelay = 0;
 
 out = sim('PID_controler.slx');
 
@@ -95,10 +96,42 @@ figure(1)
 plot(t,out.simout);
 
 %PID contorler met verbeterde parameters
-k = 100;
-KI = 1;
-KD = 0;
-TaS = 0;
+k = 18;
+KI = 85;
+KD = 0.63;
+TaS = 1/10000;
+tdelay = 0;
+
+out = sim('PID_controler.slx');
+
+figure(2)
+plot(t,out.simout);
+
+%%
+%part 4
+clear all
+close all
+load tf04.mat
+
+%PID contorler met verbeterde parameters
+k = 18;
+KI = 85;
+KD = 0.63;
+TaS = 1/10000;
+
+
+s = tf('s');
+TC = k + KI/s + KD*s/(TaS + s);
+
+Hol = sys * TC;
+margin(Hol);
+[Gm,Pm,Wcp, Wvp] = margin(Hol);
+
+tmax=(Pm*pi)/(180*Wvp);
+tmax
+
+t = (0:0.001:1)';
+tdelay = 0;
 
 out = sim('PID_controler.slx');
 
