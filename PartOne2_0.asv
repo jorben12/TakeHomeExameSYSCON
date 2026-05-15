@@ -96,9 +96,9 @@ figure(1)
 plot(t,out.simout);
 
 %PID contorler met verbeterde parameters
-k = 19;
-KI = 90;
-KD = 0.64;
+k = 18;
+KI = 85;
+KD = 0.63;
 TaS = 1/10000;
 tdelay = 0;
 
@@ -106,6 +106,8 @@ out = sim('PID_controler.slx');
 
 figure(2)
 plot(t,out.simout);
+hold on
+plot (t,out.step);
 
 %%
 %part 4
@@ -114,10 +116,11 @@ close all
 load tf04.mat
 
 %PID contorler met verbeterde parameters
-k = 20;
-KI = 100;
-KD = 0.65;
+k = 18;
+KI = 85;
+KD = 0.63;
 TaS = 1/10000;
+
 
 s = tf('s');
 TC = k + KI/s + KD*s/(TaS + s);
@@ -126,18 +129,33 @@ Hol = sys * TC;
 margin(Hol);
 [Gm,Pm,Wcp, Wvp] = margin(Hol);
 
-tmax=(Pm*pi)/(180*Wvp);
-tmax
+tmax = (Pm*pi)/(180*Wvp)
 
-t = (0:0.001:2)';
-
-k = 20;
-KI = 100;
-KD = 0.65;
-TaS = 1/10000;
-tdelay = tmax;
+t = (0:0.001:1)';
+tdelay = 0.0006061; %marginely stabel
 
 out = sim('PID_controler.slx');
 
 figure(2)
 plot(t,out.simout);
+hold on
+plot (t,out.step);
+
+%%
+% part 4.3 
+clear all
+close all
+load tf04.mat
+
+k = 6;
+KI = 70;
+KD = 0.3;
+TaS = 1/10000;
+
+tdelay = 0.0006061;
+t = (0:0.001:1)';
+
+out = sim('PID_controler.slx');
+plot(t,out.simout);
+hold on
+plot (t,out.step);

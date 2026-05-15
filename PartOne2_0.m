@@ -106,6 +106,8 @@ out = sim('PID_controler.slx');
 
 figure(2)
 plot(t,out.simout);
+hold on
+plot (t,out.step);
 
 %%
 %part 4
@@ -127,13 +129,33 @@ Hol = sys * TC;
 margin(Hol);
 [Gm,Pm,Wcp, Wvp] = margin(Hol);
 
-tmax=(Pm*pi)/(180*Wvp);
-tmax
+tmax = (Pm*pi)/(180*Wvp)
 
 t = (0:0.001:1)';
-tdelay = 0;
+tdelay = 0.0006061; %marginely stabel
 
 out = sim('PID_controler.slx');
 
 figure(2)
 plot(t,out.simout);
+hold on
+plot (t,out.step);
+
+%%
+% part 4.3 
+clear all
+close all
+load tf04.mat
+
+k = 6.5;
+KI = 47;
+KD = 0.298;
+TaS = 1/10000;
+
+tdelay = 0.0006061;
+t = (0:0.001:1)';
+
+out = sim('PID_controler.slx');
+plot(t,out.simout);
+hold on
+plot (t,out.step);
