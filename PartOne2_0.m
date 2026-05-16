@@ -2,7 +2,7 @@
 clear all
 close all
 
-z1 =[0+45i 0-45i];
+z1 =[0+50i 0-50i];
 p1 =[-1 -2000];
 
 z2 =  [0+500i 0-500i];
@@ -49,7 +49,7 @@ close all
 load tf04.mat
 
 figure(1);
-bode(sys); 
+margin(sys); 
 
 figure(2);
 pzmap(sys);
@@ -71,6 +71,8 @@ clear all
 close all
 load tf04.mat
 
+figure(1)
+margin(sys)
 [Gm,Pm,Wcp, Wvp] = margin(sys);
 
 Gm
@@ -92,7 +94,7 @@ tdelay = 0;
 
 out = sim('PID_controler.slx');
 
-figure(1)
+figure(2)
 plot(t,out.simout);
 
 %PID contorler met verbeterde parameters
@@ -104,7 +106,7 @@ tdelay = 0;
 
 out = sim('PID_controler.slx');
 
-figure(2)
+figure(3)
 plot(t,out.simout);
 hold on
 plot (t,out.step);
@@ -159,3 +161,15 @@ out = sim('PID_controler.slx');
 plot(t,out.simout);
 hold on
 plot (t,out.step);
+hold on
+
+k = 18;
+KI = 85;
+KD = 0.63;
+TaS = 1/10000;
+tdelay = 0;
+
+out = sim('PID_controler.slx');
+plot(t,out.simout);
+
+legend("met delay", "step","zonder delay")
